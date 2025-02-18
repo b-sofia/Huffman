@@ -1,4 +1,4 @@
-#include "huffman.h"
+#include "Huffman.h"
 Huffman::Huffman() {}
 std::map<char, int> Huffman::countFrequencies(const std::string& data) {
     std::map<char, int> freqMap;
