@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <queue>
 class Huffman {
 public:
 
@@ -19,5 +20,6 @@ struct Node {
         }
     };
     std::map<char, int> countFrequencies(const std::string& data);
+    Node* buildHuffmanTree(const std::map<char, int>& freqMap);
 
 };   
