@@ -1,3 +1,5 @@
+#ifndef HUFFMAN_H
+#define HUFFMAN_H
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -23,4 +25,5 @@ struct Node {
     Node* buildHuffmanTree(const std::map<char, int>& freqMap);
     void generateCodes(Node* root, std::string code, std::map<char, std::string>& huffmanCodes);
 
-};   
+};  
+#endif 
