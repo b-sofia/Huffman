@@ -26,3 +26,13 @@ Huffman::Node* Huffman::buildHuffmanTree(const std::map<char, int>& freqMap) {
 
     return pq.top();
 }
+void Huffman::generateCodes(Node* root, std::string code, std::map<char, std::string>& huffmanCodes) {
+    if (root == nullptr) return;
+ 
+    if (root->symb != '\0') {
+        huffmanCodes[root->symb] = code;
+    }
+ 
+    generateCodes(root->left, code + "0", huffmanCodes);
+    generateCodes(root->right, code + "1", huffmanCodes);
+}
