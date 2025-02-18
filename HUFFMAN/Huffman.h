@@ -21,5 +21,6 @@ struct Node {
     };
     std::map<char, int> countFrequencies(const std::string& data);
     Node* buildHuffmanTree(const std::map<char, int>& freqMap);
+    void generateCodes(Node* root, std::string code, std::map<char, std::string>& huffmanCodes);
 
 };   
