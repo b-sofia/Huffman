@@ -5,6 +5,7 @@
 #include <map>
 #include <queue>
 #include <bitset>
+#include <vector>
 class Huffman {
 public:
     Huffman();

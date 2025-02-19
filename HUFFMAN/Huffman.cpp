@@ -74,6 +74,44 @@ std::string encodeData(const std::string& data, const std::map<char, std::string
     return encodedData;
 }
 
+
+void Huffman::serializeTree(Node* root, std::ofstream& outFile) {
+    if (root == nullptr) {
+        outFile.put(0);
+        return;
+    }
+
+    outFile.put(1);
+    outFile.put(root->symb);
+    outFile.write(reinterpret_cast<char*>(&root->freq), sizeof(root->freq));
+
+    serializeTree(root->left, outFile);
+    serializeTree(root->right, outFile);
+}
+
+
+Huffman::Node* Huffman::deserializeTree(std::ifstream& inFile) {
+    char marker;
+    inFile.get(marker);
+
+    if (marker == 0) {
+        return nullptr;
+    }
+
+    char symb;
+    inFile.get(symb);
+
+    int freq;
+    inFile.read(reinterpret_cast<char*>(&freq), sizeof(freq));
+
+    Node* node = new Node(symb, freq);
+    node->left = deserializeTree(inFile);
+    node->right = deserializeTree(inFile);
+
+    return node;
+}
+
+
 std::string Huffman::readCompressedData(const std::string& inputFile, Node*& root) {
  std::ifstream inFile(inputFile, std::ios::binary);
  if (!inFile) {
