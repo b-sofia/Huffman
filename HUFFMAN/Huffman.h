@@ -7,7 +7,8 @@
 #include <bitset>
 class Huffman {
 public:
-
+    Huffman();
+    void decompress(const std::string& inputFile, const std::string& outputFile);
 private:
 struct Node {
         char symb;
