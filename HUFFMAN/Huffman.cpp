@@ -37,6 +37,35 @@ void Huffman::generateCodes(Node* root, std::string code, std::map<char, std::st
     generateCodes(root->right, code + "1", huffmanCodes);
 }
 
+
+
+void Huffman::writeCompressedData(const std::string& encodedData, Node* root, const std::string& outputFile) {
+    std::ofstream outFile(outputFile, std::ios::binary);
+    if (!outFile) {
+        std::cerr << "Error opening file" << std::endl;
+        return;
+    }
+      size_t dataSize = encodedData.size();
+      outFile.write(reinterpret_cast<char*>(&dataSize), sizeof(dataSize));   
+      serializeTree(root, outFile);
+      std::bitset<8> byte;
+      int bitCount = 0;
+      for (char bit : encodedData) {
+          byte[bitCount++] = (bit == '1');
+          if (bitCount == 8) {
+              outFile.put(static_cast<char>(byte.to_ulong()));
+              byte.reset();
+              bitCount = 0;
+          }
+      }
+    if (bitCount > 0) {
+        outFile.put(static_cast<char>(byte.to_ulong()));
+    } 
+    outFile.close();
+}
+
+
+
 std::string encodeData(const std::string& data, const std::map<char, std::string>& huffmanCodes) {
     std::string encodedData;
     for (char ch : data) {
