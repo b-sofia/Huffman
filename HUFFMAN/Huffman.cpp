@@ -42,7 +42,7 @@ void Huffman::generateCodes(Node* root, std::string code, std::map<char, std::st
 void Huffman::writeCompressedData(const std::string& encodedData, Node* root, const std::string& outputFile) {
     std::ofstream outFile(outputFile, std::ios::binary);
     if (!outFile) {
-        std::cerr << "Ошибка открытия файла для записи!" << std::endl;
+        std::cerr << "Error opening file" << std::endl;
         return;
     }
       size_t dataSize = encodedData.size();
