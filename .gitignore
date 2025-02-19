@@ -1,0 +1,15 @@
+*.bin
+*.o
+*.exe
+*.out
+*.swp
+*.swo
+*.log
+build/
+dist/
+bin/
+.vscode/
+.idea/
+input.txt
+output.txt
+compressed.bin
