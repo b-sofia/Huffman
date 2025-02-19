@@ -4,6 +4,7 @@
 #include <fstream>
 #include <map>
 #include <queue>
+#include <bitset>
 class Huffman {
 public:
 
@@ -25,6 +26,10 @@ struct Node {
     Node* buildHuffmanTree(const std::map<char, int>& freqMap);
     void generateCodes(Node* root, std::string code, std::map<char, std::string>& huffmanCodes);
     std::string encodeData(const std::string& data, const std::map<char, std::string>& huffmanCodes);
+
+    Node* deserializeTree(std::ifstream& inFile);
+
+    std::string readCompressedData(const std::string& inputFile, Node*& root);
 
 };  
 #endif 
