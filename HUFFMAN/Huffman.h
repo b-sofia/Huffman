@@ -27,6 +27,7 @@ struct Node {
     Node* buildHuffmanTree(const std::map<char, int>& freqMap);
     void generateCodes(Node* root, std::string code, std::map<char, std::string>& huffmanCodes);
     std::string encodeData(const std::string& data, const std::map<char, std::string>& huffmanCodes);
+    void writeCompressedData(const std::string& encodedData, Node* root, const std::string& outputFile);
 
     Node* deserializeTree(std::ifstream& inFile);
 
