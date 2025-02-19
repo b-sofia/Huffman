@@ -151,3 +151,19 @@ std::string Huffman::decodeData(const std::string& encodedData, Node* root) {
     }
     return decodedData;
 }
+
+void Huffman::decompress(const std::string& inputFile, const std::string& outputFile) {
+    Node* root = nullptr;
+    std::string encodedData = readCompressedData(inputFile, root);
+    std::string decodedData = decodeData(encodedData, root);
+    std::ofstream outFile(outputFile);
+    if (!outFile) {
+        std::cerr << "Ошибка открытия файла для записи!" << std::endl;
+        return;
+    }
+ 
+    outFile << decodedData;
+    outFile.close();
+ 
+    std::cout << "Файл успешно распакован и сохранен в " << outputFile << std::endl;
+}
