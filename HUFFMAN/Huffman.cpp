@@ -36,3 +36,11 @@ void Huffman::generateCodes(Node* root, std::string code, std::map<char, std::st
     generateCodes(root->left, code + "0", huffmanCodes);
     generateCodes(root->right, code + "1", huffmanCodes);
 }
+
+std::string encodeData(const std::string& data, const std::map<char, std::string>& huffmanCodes) {
+    std::string encodedData;
+    for (char ch : data) {
+        encodedData += huffmanCodes.at(ch);
+    }
+    return encodedData;
+}
