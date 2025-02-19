@@ -51,26 +51,19 @@ std::string Huffman::readCompressedData(const std::string& inputFile, Node*& roo
      std::cerr << "Ошибка открытия файла для чтения!" << std::endl;
  return "";
     }
-    
-
 size_t dataSize;
-     inFile.read(reinterpret_cast<char*>(&dataSize), sizeof(dataSize));
-    
-
- root = deserializeTree(inFile);
-
-     std::string encodedData;
-     char byte;
-     while (inFile.get(byte)) {
+inFile.read(reinterpret_cast<char*>(&dataSize), sizeof(dataSize));
+root = deserializeTree(inFile);
+std::string encodedData;
+char byte;
+while (inFile.get(byte)) {
      std::bitset<8> bits(byte);
      for (int i = 0; i < 8; ++i) {
-     encodedData += (bits[i] ? '1' : '0');
+        encodedData += (bits[i] ? '1' : '0');
      }
      }
 
-
- encodedData.resize(dataSize);
-
-     inFile.close();
-    return encodedData;
-    }
+encodedData.resize(dataSize);
+inFile.close();
+return encodedData;
+    }  
