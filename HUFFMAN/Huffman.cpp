@@ -129,8 +129,25 @@ while (inFile.get(byte)) {
         encodedData += (bits[i] ? '1' : '0');
      }
      }
-
 encodedData.resize(dataSize);
 inFile.close();
 return encodedData;
     }  
+
+std::string Huffman::decodeData(const std::string& encodedData, Node* root) {
+    std::string decodedData;
+    Node* current = root;
+    for (char bit : encodedData) {
+        if (bit == '0') {
+            current = current->left;
+        } else {
+            current = current->right;
+        }
+    
+        if (current->symb != '\0') {
+            decodedData += current->symb;
+            current = root;
+        }
+    }
+    return decodedData;
+}
