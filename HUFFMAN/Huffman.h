@@ -34,6 +34,7 @@ struct Node {
     Node* deserializeTree(std::ifstream& inFile);
 
     std::string readCompressedData(const std::string& inputFile, Node*& root);
+    std::string decodeData(const std::string& encodedData, Node* root);
 
 };  
 #endif 
