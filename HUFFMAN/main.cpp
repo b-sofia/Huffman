@@ -8,4 +8,5 @@ int main() {
     huffman.decompress("compressed.bin", "output.txt");
 
     return 0;
+	
 }
