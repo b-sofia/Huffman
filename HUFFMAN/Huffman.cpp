@@ -188,3 +188,10 @@ void Huffman::compress(const std::string& inputFile, const std::string& outputFi
 
     std::cout << "File has been successfully compressed and saved to " << outputFile << std::endl;
 }
+std::string Huffman::encodeData(const std::string& data, const std::map<char, std::string>& huffmanCodes) {
+    std::string encodedData;
+    for (char ch : data) {
+        encodedData += huffmanCodes.at(ch);
+    }
+    return encodedData;
+}

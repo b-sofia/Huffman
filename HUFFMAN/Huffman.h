@@ -1,4 +1,4 @@
-#ifndef HUFFMAN_H
+
 #define HUFFMAN_H
 #include <iostream>
 #include <fstream>
@@ -38,4 +38,3 @@ struct Node {
     std::string decodeData(const std::string& encodedData, Node* root);
 
 };  
-#endif 
