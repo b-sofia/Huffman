@@ -115,7 +115,7 @@ Huffman::Node* Huffman::deserializeTree(std::ifstream& inFile) {
 std::string Huffman::readCompressedData(const std::string& inputFile, Node*& root) {
  std::ifstream inFile(inputFile, std::ios::binary);
  if (!inFile) {
-     std::cerr << "Ошибка открытия файла для чтения!" << std::endl;
+     std::cerr << "Error of openning file to reading!" << std::endl;
  return "";
     }
 size_t dataSize;
@@ -158,12 +158,33 @@ void Huffman::decompress(const std::string& inputFile, const std::string& output
     std::string decodedData = decodeData(encodedData, root);
     std::ofstream outFile(outputFile);
     if (!outFile) {
-        std::cerr << "Ошибка открытия файла для записи!" << std::endl;
+        std::cerr << "Error of openning file to writing!" << std::endl;
         return;
     }
  
     outFile << decodedData;
     outFile.close();
  
-    std::cout << "Файл успешно распакован и сохранен в " << outputFile << std::endl;
+    std::cout << "File has been successfully unpacked and saved to " << outputFile << std::endl;
+}
+void Huffman::compress(const std::string& inputFile, const std::string& outputFile) {
+    std::ifstream inFile(inputFile);
+    if (!inFile) {
+        std::cerr << "Error opening the file for reading!" << std::endl;
+        return;
+    }
+    std::string data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
+    inFile.close();
+    std::map<char, int> freqMap = countFrequencies(data);
+
+    Node* root = buildHuffmanTree(freqMap);
+
+    std::map<char, std::string> huffmanCodes;
+    generateCodes(root, "", huffmanCodes);
+
+    std::string encodedData = encodeData(data, huffmanCodes);
+
+    writeCompressedData(encodedData, root, outputFile);
+
+    std::cout << "File has been successfully compressed and saved to " << outputFile << std::endl;
 }
